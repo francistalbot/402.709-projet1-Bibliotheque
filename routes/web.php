@@ -19,7 +19,9 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-
+Route::get('/nouveautes', [HomeController::class, 'nouveautes'])->name('nouveautes');
+Route::get('/messages', [HomeController::class, 'showMessages'])->name('messages.index');
+Route::post('/messages', [HomeController::class, 'storeMessage'])->name('messages.store');
 
 Route::prefix('livres')->group(function () {
     Route::get('/', [LivreController::class, 'index'])->name('livres.index');
