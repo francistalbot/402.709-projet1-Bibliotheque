@@ -4528,6 +4528,11 @@ textarea.form-control-lg {
   list-style: none;
 }
 
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .page-link {
   position: relative;
   display: block;
