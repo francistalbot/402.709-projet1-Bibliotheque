@@ -7,7 +7,7 @@
     <ul>
             @foreach($messages as $message)
                 <li>
-                    <strong>{{ $message->name }}</strong> ({{ $message->email }}): {{ $message->message }}
+                    <strong>{{ $message->name }}</strong> ({{ $message->email }}): {{ $message->texte }}
                 </li>
                 @endforeach
     </ul>

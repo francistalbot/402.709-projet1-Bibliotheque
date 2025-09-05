@@ -23,8 +23,8 @@
                 <input type="email" id="email" name="email" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="message">Message :</label>
-                <textarea id="message" name="message" class="form-control" required></textarea>
+                <label for="texte">Message :</label>
+                <textarea id="texte" name="texte" class="form-control" required></textarea>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Envoyer</button>
