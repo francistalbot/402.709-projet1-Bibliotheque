@@ -15,7 +15,20 @@ class LivreController extends Controller
      */
     public function index()
     {
-        $livres = Livre::all();
+        // Recherche
+        if ($search = request('search')) {
+            $livres = Livre::where('titre', 'like', "%{$search}%")
+                ->orWhere('publication_annee', 'like', "%{$search}%")
+                ->orWhereHas('auteur', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('categorie', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->get();
+        } else {            
+            $livres = Livre::all();
+        }
         return view('livres.index', compact('livres'));
     }
 
@@ -35,7 +48,18 @@ class LivreController extends Controller
      */
     public function store(Request $request)
     {
-        
+        if ($request->filled('new_author') && $request->input('new_author') !== null && $request->input('auteur_id') === null) {
+            $author = Author::firstOrCreate(['name' => $request->input('new_author')]);
+            $request->merge(['auteur_id' => $author->id]);
+            //dd($author->id);
+        }
+        //dd($request->all());
+        if ($request->filled('new_category') && $request->input('new_category') !== null && $request->input('categorie_id') === null) {
+            $category = Category::firstOrCreate(['name' => $request->input('new_category')]);
+            $request->merge(['categorie_id' => $category->id]);
+            //dd($category->id);
+        }
+        //dd($request->all());
         // Validation des données
         $validatedData = $request->validate([
             'titre' => 'required|string|max:255',
@@ -46,9 +70,14 @@ class LivreController extends Controller
             'isbn' => 'required|string|max:13|unique:livres,isbn',
             'resume' => 'nullable|string',
         ]);
-        
-        // Création du livre (remplacer par la logique de votre modèle)
-        Livre::create($validatedData);
+
+        try {
+            // Création du livre (remplacer par la logique de votre modèle)
+            Livre::create($validatedData);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Erreur lors de la création du livre: ' . $e->getMessage()])->withInput();
+        }
+
         // Redirection vers la liste des livres avec un message de succès
         return redirect()->route('livres.index')->with('success', 'Livre créé avec succès !');
     }
@@ -76,9 +105,19 @@ class LivreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $livre)
+    public function update(Request $request, string $id)
     {
-        $livre = Livre::findOrFail($livre);
+        $livre = Livre::findOrFail($id);
+        if ($request->filled('new_author') && $request->input('new_author') !== null && $request->input('auteur_id') === null) {
+            $author = Author::firstOrCreate(['name' => $request->input('new_author')]);
+            $request->merge(['auteur_id' => $author->id]);
+            
+        }
+        if ($request->filled('new_category') && $request->input('new_category') !== null && $request->input('categorie_id') === null) {
+            $category = Category::firstOrCreate(['name' => $request->input('new_category')]);
+            $request->merge(['categorie_id' => $category->id]);
+            
+        }
         // Validation des données
         $validatedData = $request->validate([
             'titre' => 'required|string|max:255',
@@ -89,8 +128,13 @@ class LivreController extends Controller
             'isbn' => 'required|string|max:13|unique:livres,isbn,' . $livre->id,
             'resume' => 'nullable|string',
         ]);
-        // Mise à jour du livre
-        $livre->update($validatedData);
+        try {
+            // Création du livre (remplacer par la logique de votre modèle)
+            $livre->update($validatedData);
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Erreur lors de la mise à jour du livre: ' . $e->getMessage()])->withInput();
+        }
+
         return redirect()->route('livres.index')->with('success', 'Livre mis à jour avec succès !');
     }
 

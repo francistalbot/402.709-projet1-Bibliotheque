@@ -8,40 +8,44 @@
         @csrf
         <div>
             <label for="titre">Titre:</label>
-            <input type="text" id="titre" name="titre" required>
+            <input type="text" id="titre" name="titre" value="{{ old('titre') }}" required>
         </div>
         <div>
             <label for="resume">Résumé:</label>
-            <textarea id="resume" name="resume" required></textarea>
+            <textarea id="resume" name="resume" value="{{ old('resume') }}" required></textarea>
         </div>
         <div >
             <label for="isbn">ISBN:</label>
-            <input type="text" id="isbn" name="isbn" required>
+            <input type="text" id="isbn" name="isbn" value="{{ old('isbn') }}" required>
         </div>
         <div>
             <label for="auteur_id">Auteur:</label>
-            <select id="auteur_id" name="auteur_id" required>
+            <select id="auteur_id" name="auteur_id" >
+                <option value="">-- Sélectionner un auteur --</option>
                 @foreach($authors as $author)
                     <option value="{{ $author->id }}">{{ $author->name }}</option>
                 @endforeach
-            </select>   
+            </select>
+             <input type="text" id="new_author" name="new_author" value="{{ old('new_author') }}" placeholder="Ou ajouter un nouvel auteur">  
         </div>
         <div>
             <label for="categorie_id">Catégorie:</label>
-            <select id="categorie_id" name="categorie_id" required>
+            <select id="categorie_id" name="categorie_id" >
+                <option value="">-- Sélectionner une catégorie --</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
-            </select>   
+            </select>
+            <input type="text" id="new_category" name="new_category" value="{{ old('new_category') }}" placeholder="Ou ajouter une nouvelle catégorie">   
         </div>
 
         <div>
             <label for="publication_annee">Année de Publication:</label>
-            <input type="number" id="publication_annee" name="publication_annee" required>
+            <input type="number" id="publication_annee" name="publication_annee" value="{{ old('publication_annee') }}" required>
         </div>
         <div>
             <label for="prix">Prix:</label>
-            <input type="number" step="0.01" id="prix" name="prix" required>
+            <input type="number" step="0.01" id="prix" name="prix" value="{{ old('prix') }}" required>
         </div>
         <button type="submit">Ajouter le Livre</button>
     </form>
