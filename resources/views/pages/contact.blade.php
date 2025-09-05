@@ -3,25 +3,30 @@
 @section('title', 'Contact')
 
 @section('content')
-    <h2>Contactez-nous</h2>
+    <div class="py-1 py-md-3">
+        <h2>Contactez-nous</h2>
+    </div>
+    <hr>
      @if(session('success'))
         <div>{{ session('success') }}</div>
     @endif
     <p>Pour toute question, n'hésitez pas à nous contacter.</p>
     <form action="{{ route('messages.store') }}" method="POST">
         @csrf
-        <div>
-            <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" required>
+        <div class="mb-3 text-start w-lg-50 m-auto">
+            <div class="form-group">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" class="form-control" required></textarea>
+            </div>
         </div>
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="message">Message :</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit">Envoyer</button>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
 @endsection

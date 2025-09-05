@@ -1065,6 +1065,10 @@ progress {
   .col-md {
     flex: 1 0 0%;
   }
+  .w-md-50 {
+    width: 50% !important;
+  }
+
   .row-cols-md-auto > * {
     flex: 0 0 auto;
     width: auto;
@@ -1233,6 +1237,9 @@ progress {
 @media (min-width: 992px) {
   .col-lg {
     flex: 1 0 0%;
+  }
+  .w-lg-50 {
+    width: 50% !important;
   }
   .row-cols-lg-auto > * {
     flex: 0 0 auto;

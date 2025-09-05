@@ -8,7 +8,7 @@
     </div>
     <hr>
     <p>Découvrez les dernières acquisitions de la Bibliothèque à Livres.</p>
-    <div class="row gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-left">
+    <div class="row gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
     
         @foreach($livres as $livre)
             <div class="col mb-5 cursor-pointer" href="{{ route('livres.show',['livre' => $livre->id]) }}">
