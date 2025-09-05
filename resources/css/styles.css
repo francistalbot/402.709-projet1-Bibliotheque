@@ -4219,6 +4219,11 @@ textarea.form-control-lg {
   margin-bottom: 0;
 }
 
+.card-link {
+  text-decoration: none;
+  color:black;
+  font-weight: 500;
+}
 .card-link + .card-link {
   margin-left: var(--bs-card-spacer-x);
 }

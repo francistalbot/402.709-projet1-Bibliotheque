@@ -14,20 +14,23 @@
 </head>
 <body>
     <header>
-        <h1>Projet 1 – Bibliothèque à Livres</h1>
         @include('partials.menu')
-        <hr>
     </header>
 
-    <main>
-        @yield('content')
+    <main class="bg-light py-5 text-center">
+        <div class="container">
+            @yield('content')
+        </div>
     </main>
 
-    <hr>
-    <footer>
-        <small>&copy; {{ date('Y') }} Projet 1 – Bibliothèque à Livres</small>
-    </footer>
-
+<!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">
+        <small>&copy; {{ date('Y') }} Projet 1 – Bibliothèque à Livres</small></p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        
     @stack('scripts')
 </body>
 </html>
