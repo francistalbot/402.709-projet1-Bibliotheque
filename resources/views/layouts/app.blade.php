@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <title>@yield('title', 'Mon Site Laravel')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     @stack('head')
     @vite([
     "resources/js/app.js",
+    "resources/css/styles.css",
 ])
 </head>
 <body>
