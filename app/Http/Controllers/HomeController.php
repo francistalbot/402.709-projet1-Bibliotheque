@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function nouveautes()
     {
-        $livres = Livre::latest()->take(5)->get();
+        $livres = Livre::latest()->take(3)->get();
         return view('pages.nouveautes', compact('livres'));
     }
     public function showMessages()
