@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,9 @@ Route::prefix('categories')->group(function () {
     Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
+
+
+Route::get('/payment/form', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+Route::post('/payment/pay', [PaymentController::class, 'pay'])->name('payment.pay'); 
+Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success'); 
+Route::get('/payment/error', [PaymentController::class, 'error'])->name('payment.error');
