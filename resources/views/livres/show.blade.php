@@ -50,8 +50,7 @@
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         overflow: hidden;">
-                        <small>Dans un futur lointain, l'humanité a colonisé de nombreuses planètes à travers la galaxie. Sur la planète Zorax, une jeune scientifique nommée Lyra découvre une ancienne technologie extraterrestre qui pourrait changer le destin de l'univers. Cependant, elle doit faire face à des forces obscures qui cherchent à s'emparer de cette technologie pour des fins sinistres. Avec l'aide d'un groupe hétéroclite d'alliés, Lyra entreprend un voyage périlleux pour protéger la découverte et révéler la vérité sur les origines de l'humanité.
-                        </small>
+                        <small> {{ $livre->resume }}</small>
                     </blockquote>
                 </div>
             </div>

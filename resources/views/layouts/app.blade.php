@@ -17,7 +17,7 @@
         @include('partials.menu')
     </header>
 
-    <main class="bg-light py-5 text-center">
+    <main class="bg-light py-5 text-center" style="height: calc(100vh - 73px - 120px); overflow-y: auto;">
         <div class="container">
             @yield('content')
         </div>
