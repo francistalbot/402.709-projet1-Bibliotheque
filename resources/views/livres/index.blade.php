@@ -17,8 +17,8 @@
             <a href="{{ route('livres.create') }}" class="btn btn-primary col">Ajouter un Livre</a>
         </div>
         <div class="col grow-1 d-flex justify-content-end">   
-            <form class="d-flex align-items-center gap-2 w-50 " style="min-width: 500px;">
-                <input type="text" class="form-control " placeholder="Rechercher un livre par titre, catégorie, auteur ou année...">
+            <form class="d-flex align-items-center gap-2 w-50 " action="{{ route('livres.index') }}" method="GET" style="min-width: 500px;">
+                <input type="text" name="search" value="{{ request('search') }}"  class="form-control " placeholder="Rechercher un livre par titre, catégorie, auteur ou année...">
                 <button class="btn btn-outline-secondary">Rechercher</button>
             </form>
         </div>

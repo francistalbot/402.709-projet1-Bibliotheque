@@ -22,30 +22,30 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="author_id">Auteur:</label>
-                        <select  class="form-control" id="author_id" name="author_id" required>
+                        <label for="auteur_id">Auteur:</label>
+                        <select  class="form-control" id="auteur_id" name="auteur_id" required>
                             @foreach($authors as $author)
-                                <option value="{{ $author->id }}" {{ (old('author_id', $livre->author_id) == $author->id) ? 'selected' : '' }}>
+                                <option value="{{ $author->id }}" {{ (old('auteur_id', $livre->auteur_id) == $author->id) ? 'selected' : '' }}>
                                     {{ $author->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('author_id')
+                        @error('auteur_id')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="category_id">Catégorie:</label>
-                        <select class="form-control" id="category_id" name="category_id" required>
+                        <label for="categorie_id">Catégorie:</label>
+                        <select class="form-control" id="categorie_id" name="categorie_id" required>
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ (old('category_id', $livre->category_id) == $category->id) ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}" {{ (old('categorie_id', $livre->categorie_id) == $category->id) ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('category_id')
+                        @error('categorie_id')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
                     </div>

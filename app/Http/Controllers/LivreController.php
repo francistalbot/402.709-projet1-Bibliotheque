@@ -15,7 +15,20 @@ class LivreController extends Controller
      */
     public function index()
     {
-        $livres = Livre::all();
+       // Recherche
+        if ($search = request('search')) {
+            $livres = Livre::where('titre', 'like', "%{$search}%")
+                ->orWhere('publication_annee', 'like', "%{$search}%")
+                ->orWhereHas('auteur', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('categorie', function ($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->get();
+        } else {            
+            $livres = Livre::all();
+        }
         return view('livres.index', compact('livres'));
     }
 
@@ -37,7 +50,10 @@ class LivreController extends Controller
     {
         
         // Validation des données
-        $validatedData = $request->validate([
+        
+
+        try {
+            $validatedData = $request->validate([
             'titre' => 'required|string|max:255',
             'auteur_id' => 'required|exists:author,id',
             'categorie_id' => 'required|exists:category,id',
@@ -46,9 +62,14 @@ class LivreController extends Controller
             'isbn' => 'required|string|max:13|unique:livres,isbn',
             'resume' => 'nullable|string',
         ]);
+            // Création du livre (remplacer par la logique de votre modèle)
+            Livre::create($validatedData);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
         
-        // Création du livre (remplacer par la logique de votre modèle)
-        Livre::create($validatedData);
+
         // Redirection vers la liste des livres avec un message de succès
         return redirect()->route('livres.index')->with('success', 'Livre créé avec succès !');
     }
@@ -91,7 +112,7 @@ class LivreController extends Controller
         ]);
         // Mise à jour du livre
         $livre->update($validatedData);
-        return redirect()->route('livres.index')->with('success', 'Livre mis à jour avec succès !');
+        return redirect()->route('livres.show',['livre' => $livre])->with('success', 'Livre mis à jour avec succès !');
     }
 
     /**

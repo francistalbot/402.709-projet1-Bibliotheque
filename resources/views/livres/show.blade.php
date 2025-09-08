@@ -22,7 +22,7 @@
         <div class="mx-3  text-start">
             <div class="m-3">
                 <div class="w-fit bg-dark bg-opacity-75 rounded text-white p-2">
-                 Science-fiction</div>
+                 {{ $livre->categorie->name }}</div>
             </div>
             <div class="mb-3">
                 <h1 class="mb-0 mx-3">
