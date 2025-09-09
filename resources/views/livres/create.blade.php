@@ -44,6 +44,7 @@
                 </div>
                 @error('categorie_id')
                     <div style="color: red;">{{ $message }}</div>
+                @enderror
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
