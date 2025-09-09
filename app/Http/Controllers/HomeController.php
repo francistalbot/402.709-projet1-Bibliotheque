@@ -20,7 +20,7 @@ class HomeController extends Controller
 
     public function nouveautes()
     {
-        $livres = Livre::latest()->take(3)->get();
+        $livres = Livre::where('created_at', '>=', now()->subDays(10))->get();
         return view('pages.nouveautes', compact('livres'));
     }
     public function showMessages()

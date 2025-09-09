@@ -16,7 +16,7 @@
                             <div class="row mb-3 text-start">
                                 <a class="card-link text-left" ><strong>Nom :</strong> {{ $message->name }}</a>
                                     <div ><strong>Email :</strong> {{ $message->email }}</div>
-                                    <div><strong>Message :</strong> {{ $message->texte }}$</div>
+                                    <div><strong>Message :</strong> {{ $message->texte }}</div>
                                     <div><strong>Envoyé le :</strong> {{ $message->created_at->format('d/m/Y H:i') }}</div>
                             </div>
                         
