@@ -9308,6 +9308,9 @@ textarea.form-control-lg {
   }
 }
 @media (min-width: 992px) {
+   .w-lg-50 {
+    width: 50% !important;
+  }
   .float-lg-start {
     float: left !important;
   }
