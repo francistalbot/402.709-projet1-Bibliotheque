@@ -10,10 +10,21 @@
      @if(session('success'))
         <div>{{ session('success') }}</div>
     @endif
-    <p>Pour toute question, n'hésitez pas à nous contacter.</p>
-    <form action="{{ route('messages.store') }}" method="POST">
+    <div class="mb-3 text-start">
+        <h4>Informations de contact</h4>
+        <span><strong>Téléphone :</strong> (514) 123-4567</br></span>
+        <span><strong>Email :</strong> contact@bibliotheque.com</br></span>
+        <span><strong>Adresse :</strong> 123 Rue de la Bibliothèque, Montréal, QC</br></span>
+        <br>
+        <span><strong>Horaires d'ouverture :</strong></span><br>
+        <span><strong>Lundi au jeudi :</strong> 9h - 18h</br></span>
+        <span><strong>Vendredi et samedi :</strong> 11h - 17h</br></span>
+        <span><strong>Dimanche :</strong> Fermé</br></span>
+         </div>
+    <form action="{{ route('messages.store') }}" method="POST" class="my-5 ">
         @csrf
-        <div class="mb-3 text-start w-lg-50 m-auto">
+        <div class="mb-3 text-start  w-lg-50 m-auto p-3 ">
+            <h4>Envoyez-nous un message</h4>
             <div class="form-group">
                 <label for="name">Nom :</label>
                 <input type="text" id="name" name="name" class="form-control" required>
