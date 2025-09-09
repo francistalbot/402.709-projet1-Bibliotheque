@@ -36,6 +36,7 @@
 
                  <h4 class="fst-italic fw-bold">{{ $livre->prix }}$</h4>
             </div>   
+            <hr>
             <div class="row">
                 <div class=" col">
                     <strong>Auteur:</strong> {{ $livre->auteur->name }}
