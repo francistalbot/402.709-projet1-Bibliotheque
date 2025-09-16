@@ -12,7 +12,21 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('home') }}">Accueil</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contactez-nous</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('nouveautes') }}">Nouveautés</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('messages.index') }}">Messages</a></li>
+                        @auth
+                            @if(Auth::user()->isAdmin())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                        Administration
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ route('livres.create') }}">Ajouter un livre</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('authors.index') }}">Gérer les auteurs</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('categories.index') }}">Gérer les catégories</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('messages.index') }}">Messages</a></li>
+                                    </ul>
+                                </li>
+                            @endif
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
