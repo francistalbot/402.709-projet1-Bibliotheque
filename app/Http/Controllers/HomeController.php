@@ -7,7 +7,8 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
-{
+{   
+    
     public function index()
     {
         return redirect()->route('livres.index');

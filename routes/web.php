@@ -50,3 +50,6 @@ Route::prefix('categories')->group(function () {
     Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
+
+Auth::routes();
+
