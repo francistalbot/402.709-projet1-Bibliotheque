@@ -17,14 +17,15 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/nouveautes', [HomeController::class, 'nouveautes'])->name('nouveautes');
-Route::get('/messages', [HomeController::class, 'showMessages'])->name('messages.index');
+Route::get('/messages', [HomeController::class, 'showMessages'])->middleware(['auth', 'admin'])->name('messages.index');
 Route::post('/messages', [HomeController::class, 'storeMessage'])->name('messages.store');
 
-Route::prefix('livres')->group(function () {
-    Route::get('/', [LivreController::class, 'index'])->name('livres.index');
+Route::get('/livres', [LivreController::class, 'index'])->name('livres.index');
+Route::prefix('livres')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/create', [LivreController::class, 'create'])->name('livres.create');
     Route::post('/', [LivreController::class, 'store'])->name('livres.store');
     Route::get('/{livre}', [LivreController::class, 'show'])->name('livres.show');
@@ -32,7 +33,7 @@ Route::prefix('livres')->group(function () {
     Route::put('/{livre}', [LivreController::class, 'update'])->name('livres.update');
     Route::delete('/{livre}', [LivreController::class, 'destroy'])->name('livres.destroy');
 });
-Route::prefix('authors')->group(function () {
+Route::prefix('authors')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [AuthorController::class, 'index'])->name('authors.index');
     Route::get('/create', [AuthorController::class, 'create'])->name('authors.create');
     Route::post('/', [AuthorController::class, 'store'])->name('authors.store');
@@ -41,7 +42,7 @@ Route::prefix('authors')->group(function () {
     Route::put('/{author}', [AuthorController::class, 'update'])->name('authors.update');
     Route::delete('/{author}', [AuthorController::class, 'destroy'])->name('authors.destroy');
 });
-Route::prefix('categories')->group(function () {
+Route::prefix('categories')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
