@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LivreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,7 @@ Route::prefix('categories')->group(function () {
     Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
+
+Route::get('/payment/stripe/form', [StripePaymentController::class, 'showForm'])->name('stripe.form'); 
+Route::post('/payment/stripe/pay', [StripePaymentController::class, 'pay'])->name('stripe.pay');
+
