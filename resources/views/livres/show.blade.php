@@ -47,11 +47,11 @@
                 <div class="mb-2">
                     <strong>Résumé:</strong> 
                     <blockquote class="blockquote mx-5 text-break fst-italic fw-light display-1" style="
-                        -webkit-line-clamp: 5;
+                    
                         display: -webkit-box;
                         -webkit-box-orient: vertical;
                         overflow: hidden;">
-                        <small> {{ $livre->resume }}</small>
+                        <small> {!! nl2br($livre->resume) !!}</small>
                     </blockquote>
                 </div>
             </div>
