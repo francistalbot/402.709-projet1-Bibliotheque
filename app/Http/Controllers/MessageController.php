@@ -8,7 +8,7 @@ class MessageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'admin'])->except('store');
     }
 
     /**
@@ -16,15 +16,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $messages = Message::all();
+        return view('pages.messages', compact('messages'));
     }
 
     /**
@@ -32,31 +25,41 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validation des données
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'texte' => 'required|string',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Création du message
+        Message::create($validatedData);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return redirect()->route('contact')->with('success', 'Votre message a été envoyé avec succès !');
+    
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {/*
+        $categorie = Category::findOrFail($category);
+        // Validation des données
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        // Mise à jour de la catégorie
+        $categorie->update($validatedData);
+        return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès !');
+    */
+        $message = Message::findOrFail($id);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'texte' => 'required|string',
+        ]);
+        
     }
 
     /**

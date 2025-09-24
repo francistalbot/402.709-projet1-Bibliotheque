@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('texte');
             $table->string('email');
             $table->string('name');
+            $table->boolean('lu')->default(false);
             $table->timestamps();
         });
     }

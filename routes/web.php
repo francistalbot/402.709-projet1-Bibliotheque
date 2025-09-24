@@ -6,6 +6,7 @@ use App\Http\Controllers\LivreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,8 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/nouveautes', [HomeController::class, 'nouveautes'])->name('nouveautes');
-Route::get('/messages', [HomeController::class, 'showMessages'])->middleware(['auth', 'admin'])->name('messages.index');
-Route::post('/messages', [HomeController::class, 'storeMessage'])->name('messages.store');
+Route::get('/messages', [MessageController::class, 'index'])->middleware(['auth', 'admin'])->name('messages.index');
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
 Route::get('/livres', [LivreController::class, 'index'])->name('livres.index');
 Route::prefix('livres')->middleware(['auth', 'admin'])->group(function () {
