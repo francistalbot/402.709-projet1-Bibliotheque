@@ -12,6 +12,18 @@
     @endif
     <div class="mb-3 text-start">
         <h4>Informations de contact</h4>
+        <!-- Carte Google Maps -->
+            <div class="map-container mt-4">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2794.8331341876665!2d-73.6567158!3d45.5578192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a541c64b70d%3A0x654e3138211fefef!2sColl%C3%A8ge%20Ahuntsic!5e0!3m2!1sfr!2sca!4v1736386171234!5m2!1sfr!2sca" 
+                    width="100%" 
+                    height="300" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         <span><strong>Téléphone :</strong> (514) 123-4567</br></span>
         <span><strong>Email :</strong> contact@bibliotheque.com</br></span>
         <span><strong>Adresse :</strong> 123 Rue de la Bibliothèque, Montréal, QC</br></span>
