@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Message;
 
 use Illuminate\Http\Request;
 
@@ -43,23 +44,13 @@ class MessageController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {/*
-        $categorie = Category::findOrFail($category);
-        // Validation des données
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-        // Mise à jour de la catégorie
-        $categorie->update($validatedData);
-        return redirect()->route('categories.index')->with('success', 'Catégorie mise à jour avec succès !');
-    */
+    {
         $message = Message::findOrFail($id);
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'texte' => 'required|string',
+            'lu' => 'required|boolean',
         ]);
-        
+        $message->update($validatedData);
+        return redirect()->route('messages.index')->with('success', 'Message mis à jour avec succès !');
     }
 
     /**
@@ -67,6 +58,8 @@ class MessageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $message = Message::findOrFail($id);
+        $message->delete();
+        return redirect()->route('messages.index')->with('success', 'Message supprimé avec succès !');
     }
 }

@@ -19,8 +19,24 @@
                                     <div><strong>Message :</strong> {!! nl2br($message->texte) !!}</div>
                                     <div><strong>Envoyé le :</strong> {{ $message->created_at->format('d/m/Y H:i') }}</div>
                             </div>
-                        
                         </div>
+                        <div class="card-footer">
+                            <form action="{{ route('messages.destroy', $message->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce message ?')">
+                                    Supprimer
+                                </button>
+                            </form>
+                            <form action="{{ route('messages.update', $message->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="lu" value="{{ $message->lu ? 0 : 1 }}">
+                                <button type="submit" class="btn btn-sm {{ $message->lu ? 'btn-secondary' : 'btn-success' }}">
+                                    {{ $message->lu ? 'Marquer comme non lu' : 'Marquer comme lu' }}
+                                </button>
+                            </form>
+
                     </div>
                 </div>
                 @endforeach
