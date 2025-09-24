@@ -15,20 +15,51 @@ class LivreController extends Controller
      */
     public function index()
     {
-       // Recherche
-        if ($search = request('search')) {
-            $livres = Livre::where('titre', 'like', "%{$search}%")
-                ->orWhere('publication_annee', 'like', "%{$search}%")
-                ->orWhereHas('auteur', function ($query) use ($search) {
-                    $query->where('name', 'like', "%{$search}%");
-                })
-                ->orWhereHas('categorie', function ($query) use ($search) {
-                    $query->where('name', 'like', "%{$search}%");
-                })
-                ->get();
-        } else {            
-            $livres = Livre::all();
-        }
+        
+            $livres = Livre::query(); // Commencer avec un Query Builder
+    
+            // Recherche
+            if ($search = request('search')) {
+                $livres->where(function ($query) use ($search) {
+                    $query->where('titre', 'like', "%{$search}%");
+                });
+            }
+            
+            // Filtrage par auteurs
+            if ($author = request('author')) {
+                $livres->whereHas('auteur', function ($query) use ($author) {
+                    $query->where('name', 'like', "%{$author}%");
+                });
+            }
+            
+            // Filtrage par catégorie
+            if ($category = request('category')) {
+                $livres->whereHas('categorie', function ($query) use ($category) {
+                    $query->where('name', 'like', "%{$category}%");
+                });
+            }
+                // Filtrage par annee minimum 
+            if ($anneemin = request('annee_min')) {
+                $livres->where('publication_annee', '>=', (int) $anneemin);
+            }
+            
+            // Filtrage par annee maximum 
+            if ($anneemax = request('annee_max')) {
+                $livres->where('publication_annee', '<=', (int) $anneemax);
+            }
+            
+            // Filtrage par prix minimum
+            if ($prixmin = request('prix_min')) {
+                $livres->where('prix', '>=', $prixmin);
+            }
+            
+            // Filtrage par prix maximum
+            if ($prixmax = request('prix_max')) {
+                $livres->where('prix', '<=', $prixmax);
+            }
+            
+            $livres = $livres->get(); // Exécuter la query
+
         return view('livres.index', compact('livres'));
     }
 
