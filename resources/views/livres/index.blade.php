@@ -124,8 +124,11 @@
                         <h5 class="card-title">
                             <a class="card-link " href="{{ route('livres.show',['livre' => $livre->id]) }}"> {{ $livre->titre }}</a>
                         </h5></div>
-                    <div class="card-body">
-                        <div class="row mb-3">
+                    <div class="card-body position-relative">
+                    @if($livre->created_at >= now()->subDays(10))
+                        <span class="badge bg-warning position-absolute" style="top: 10px; right: 10px;">Nouveauté</span>
+                    @endif
+                    <div class="row mb-3">
                             <div class="col ">
                                 <div>Auteur: <a class="card-link" href="{{ route('authors.show',['author' => $livre->auteur->id]) }}">{{ $livre->auteur->name }}</a></div>
                                 <div>Catégorie: <a class="card-link " href="{{ route('categories.show',['category' => $livre->categorie->id]) }}">{{ $livre->categorie->name }}</a></div>
