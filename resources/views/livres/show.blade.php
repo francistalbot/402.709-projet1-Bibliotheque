@@ -8,15 +8,19 @@
     </div>
     <hr>
     <div class="mb-3 row ">
-        <div class="col  mb-3 mb-md-0">
-            <a class="col btn btn-primary" href="{{ route('livres.edit',['livre' => $livre->id]) }}">Éditer le Livre</a>
-        </div>
-        <form class="col " action="{{ route('livres.destroy',['livre' => $livre->id]) }}"
-                method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer le Livre</button>
-        </form>
+        @auth
+            @if(auth()->user()->is_admin)
+                <div class="col  mb-3 mb-md-0">
+                    <a class="col btn btn-primary" href="{{ route('livres.edit',['livre' => $livre->id]) }}">Éditer le Livre</a>
+                </div>
+                <form class="col " action="{{ route('livres.destroy',['livre' => $livre->id]) }}"
+                        method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer le Livre</button>
+                </form>
+            @endif
+        @endauth
     </div>
     <div class="m-3 px-5 pb-5 border bg-white w-50 mx-auto text-start">
         <div class="mx-3  text-start">
