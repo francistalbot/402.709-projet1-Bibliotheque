@@ -61,3 +61,11 @@ Auth::routes();
 Route::get('/payment/stripe/form', [StripePaymentController::class, 'showForm'])->name('stripe.form'); 
 Route::post('/payment/stripe/pay', [StripePaymentController::class, 'pay'])->name('stripe.pay');
 
+Route::get('/password/reset', function () {
+    return view('auth.passwords.email');
+})->name('password.request');
+
+Route::post('/password/email', function () {
+    $message = "Vous receverez un mail de réinitialisation si votre adresse est enregistrée dans notre système.";
+    return redirect()->route('livres.index')->with('success', $message);
+})->name('password.email');
