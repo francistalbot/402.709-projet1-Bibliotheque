@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Livre as Product;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function cart()
     {
+        $user = Auth::user();
         $total = \Cart::getTotal();
         $items = \Cart::getContent();
-        return view('cart',compact('items','total'));
+        return view('cart',compact('items','total','user'));
     }
 
     public function addCart($productId)
     {
         $product = Product::findOrFail($productId);
-
+        
         \Cart::add(array(
             'id' => $productId,
             'name' => $product->titre,
@@ -26,7 +28,7 @@ class CartController extends Controller
             'associatedModel' => $product
         ));
 
-        return redirect()->route('cart')->with('success','Item has been addeed to the cart');
+        return redirect()->route('cart')->with('success','L\'article a été ajouté au panier');
     }
 
     public function addQuantity($productId)
@@ -35,7 +37,7 @@ class CartController extends Controller
             'quantity' => +1
         ]);
 
-        return back()->with('success','Quantity has been increased');
+        return back()->with('success','La quantité a été augmentée');
     }
 
     public function decreaseQuantity($productId)
@@ -44,19 +46,19 @@ class CartController extends Controller
             'quantity'=> -1
         ]);
 
-        return back()->with('success','item quantity has been decreased');
+        return back()->with('success','la quantité d\'articles a été diminuée');
     }
 
     public function removeItem($productId)
     {
         \Cart::remove($productId);
-        return back()->with('success','item has been removed from the cart');
+        return back()->with('success','l\'article a été retiré du panier');
     }
 
     public function clearCart()
     {
         \Cart::clear();
-        return back()->with('success','There is no item in your cart');
+        return back()->with('success','Il n\'y a aucun article dans votre panier');
     }
 
     public function applyCoupon(Request $request) { 

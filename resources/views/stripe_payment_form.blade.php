@@ -14,7 +14,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" value="" required placeholder="Enter your email">
+                            <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" required placeholder="Enter your email">
                         </div>
                         <div class="mb-3">
                             <label for="amount" class="form-label">Montant</label>

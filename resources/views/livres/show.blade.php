@@ -7,6 +7,8 @@
         <h2>Détails du Livre</h2>
     </div>
     <hr>
+    @auth
+    @if(Auth::user()->isAdmin())
     <div class="mb-3 row ">
         @auth
             @if(auth()->user()->is_admin)
@@ -22,6 +24,9 @@
             @endif
         @endauth
     </div>
+    @endif
+    @endauth
+
     <div class="m-3 px-5 pb-5 border bg-white w-50 mx-auto text-start">
         <div class="mx-3  text-start">
             <div class="m-3">
@@ -61,7 +66,7 @@
             </div>
             
         </div>
-         <a class="btn btn-outline-primary" href="{{ route('livres.edit',['livre' => $livre->id]) }}">Ajouter au panier</a>
+         <a class="btn btn-outline-primary" href="{{ route('add.cart',$livre->id) }}">Ajouter au panier</a>
                     
     </div>
     <div class="text-start">

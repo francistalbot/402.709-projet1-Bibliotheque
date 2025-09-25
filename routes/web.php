@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CartController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +32,10 @@ Route::put('/messages/{id}', [MessageController::class, 'update'])->middleware([
 Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->middleware(['auth', 'admin'])->name('messages.destroy');
 
 Route::get('/livres', [LivreController::class, 'index'])->name('livres.index');
+Route::get('/livres/{livre}', [LivreController::class, 'show'])->name('livres.show');
 Route::prefix('livres')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/create', [LivreController::class, 'create'])->name('livres.create');
     Route::post('/', [LivreController::class, 'store'])->name('livres.store');
-    Route::get('/{livre}', [LivreController::class, 'show'])->name('livres.show');
     Route::get('/{livre}/edit', [LivreController::class, 'edit'])->name('livres.edit');
     Route::put('/{livre}', [LivreController::class, 'update'])->name('livres.update');
     Route::delete('/{livre}', [LivreController::class, 'destroy'])->name('livres.destroy');
@@ -74,19 +75,19 @@ Route::post('/password/email', function () {
 
 Route::get('/password/change', [HomeController::class, 'showChangePasswordForm'])->middleware('auth')->name('password.change');
 Route::post('/password/change', [HomeController::class, 'changePassword'])->middleware('auth')->name('password.update');
-Route::get('cart',[CartController::class,'cart'])->name('cart');
-Route::get('add-cart/{productId}',[CartController::class,'addCart'])->name('add.cart');
+Route::get('cart',[CartController::class,'cart'])->middleware('auth')->name('cart');
+Route::get('add-cart/{productId}',[CartController::class,'addCart'])->middleware('auth')->name('add.cart');
 
-Route::get('add-quantity/{productId}',[CartController::class,'addQuantity'])->name('add.quantity');
+Route::get('add-quantity/{productId}',[CartController::class,'addQuantity'])->middleware('auth')->name('add.quantity');
 
-Route::get('decrease-quantity/{productId}',[CartController::class,'decreaseQuantity'])->name('decrease.quantity');
+Route::get('decrease-quantity/{productId}',[CartController::class,'decreaseQuantity'])->middleware('auth')->name('decrease.quantity');
 
-Route::get('remove-item/{productId}',[CartController::class,'removeItem'])->name('remove.item');
+Route::get('remove-item/{productId}',[CartController::class,'removeItem'])->middleware('auth')->name('remove.item');
 
-Route::get('clear',[CartController::class,'clearCart'])->name('clear');
+Route::get('clear',[CartController::class,'clearCart'])->middleware('auth')->name('clear');
 
-Route::post('/coupon/apply', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+Route::post('/coupon/apply', [CartController::class, 'applyCoupon'])->middleware('auth')->name('coupon.apply');
 
-Route::post('/stripe/refund/{paymentIntentId}', [StripePaymentController::class, 'refund'])->name('stripe.refund');
+Route::post('/stripe/refund/{paymentIntentId}', [StripePaymentController::class, 'refund'])->middleware(['auth', 'admin'])->name('stripe.refund');
 Route::get('/stripe/payments', [StripePaymentController::class, 'paymentHistory'])->middleware(['auth', 'admin'])->name('stripe.payments');
 
