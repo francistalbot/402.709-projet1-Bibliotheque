@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+
 ];

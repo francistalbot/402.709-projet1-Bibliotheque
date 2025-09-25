@@ -8,7 +8,7 @@
                         <form action="{{ route('stripe.pay') }}" method="POST" id="payment-form"> 
                             @csrf 
                             <input type="email" name="email" placeholder="Votre email" required> 
-                            <input type="number" name="amount" placeholder="Montant" required> 
+                            <input type="number" name="amount" value="{{ $price }}" placeholder="Montant" required> 
                             <div id="card-element"></div> 
                             <button type="submit">Payer</button> 
                         </form>

@@ -12,7 +12,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="amount">Amount</label>
-                            <input type="text" name="amount" id="amount" class="form-control" required>
+                            <input type="text" name="amount" id="amount" value="{{ $price }}" class="form-control" required>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Pay with PayPal</button>
                     </form>
