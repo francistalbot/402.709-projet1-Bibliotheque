@@ -24,6 +24,9 @@
                     <td>{{ strtoupper($payment->currency) }}</td>
                     <td>{{ ucfirst($payment->payment_status) }}</td>
                     <td>{{ $payment->created_at->format('Y-m-d H:i:s') }}</td>
+                    <td>
+                        <a href="{{ route('form.refund', $payment->payment_id) }}" class="btn btn-sm btn-primary">Rembourcement</a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

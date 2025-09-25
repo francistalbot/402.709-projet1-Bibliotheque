@@ -28,7 +28,7 @@
                                         <div class="me-lg-5">
                                             <div class="d-flex">
                                                 <!-- <img src=""
-                                                    class="border rounded me-3" style="width: 96px; height: 96px" />-->
+                                                        class="border rounded me-3" style="width: 96px; height: 96px" />-->
                                                 <div class="">
                                                     <a href="#" class="nav-link">{{ $item->name }}</a>
                                                     <p class="text-muted">{{ Number::currency($item->price) }}</p>
@@ -92,37 +92,47 @@
                 <div class="col-lg-3">
                     <div class="card mb-3 border shadow-0">
                         <div class="card-body">
-                             <form action="{{ route('coupon.apply') }}" method="POST">
+                            <form action="{{ route('coupon.apply') }}" method="POST">
+                                @csrf
                                 <div class="form-group">
                                     <label class="form-label">coupon promo</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control border" name="code"
-                                            placeholder="code promo" />
+                                        <input type="text" class="form-control border"id="code" name="code"
+                                            placeholder="code promo" />   
                                         <button class="btn btn-light border">Appliquer</button>
                                     </div>
                                 </div>
                             </form>
-                            <form method="POST" action="{{ route('stripe.refund',['paymentIntentId'=>'pi_demo_123']) }}">@csrf
-<label>Montant ($)</label>
-<input name="amount" type="number" step="0.01" value="10.00">
-<button type="submit">Rembourser</button>
-</form>
+                            <!--
+                            <form method="POST" action="{{ route('stripe.refund', ['paymentIntentId' => 'pi_demo_123']) }}">
+                                @csrf
+                                <label>Montant ($)</label>
+                                <input name="amount" type="number" step="0.01" value="10.00">
+                                <button type="submit">Rembourser</button>
+                            </form>
+                        -->
                         </div>
                     </div>
 
                     <div class="card shadow-0 border">
                         <div class="card-body">
-<hr />
+                            <hr />
+                            <h5 class="mb-3">Résumé</h5>
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-2">Remise:</p>
+                                <p class="mb-2 fw-bold"> {{ $value }}</p>
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <p class="mb-2">Prix ​​total:</p>
                                 <p class="mb-2 fw-bold">{{ Number::currency($total, 'cad') }}</p>
                             </div>
 
                             <div class="mt-3">
-                                <a href="{{ route('stripe.form',['price'=>$total]) }}" class="btn btn-success w-100 shadow-0 mb-2">
+                                <a href="{{ route('stripe.form', ['price' => $total]) }}"
+                                    class="btn btn-success w-100 shadow-0 mb-2">
                                     Payer
                                 </a>
-                                <a href="{{ route("livres.index") }}" class="btn btn-light w-100 border mt-2">
+                                <a href="{{ route('livres.index') }}" class="btn btn-light w-100 border mt-2">
                                     Retourner au bibliotheque
                                 </a>
                             </div>

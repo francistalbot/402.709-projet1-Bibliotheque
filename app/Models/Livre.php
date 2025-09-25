@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Livre extends Model
 {
-    protected $fillable = ['id', 'titre', 'auteur_id', 'isbn', 'publication_annee', 'categorie_id', 'resume','prix' ];
+    protected $fillable = ['id', 'titre', 'auteur_id', 'isbn', 'publication_annee', 'categorie_id', 'resume','prix', 'promo' ];
     protected $table = 'livres';
     protected $primaryKey = 'id';
     public function auteur()

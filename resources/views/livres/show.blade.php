@@ -10,8 +10,7 @@
     @auth
     @if(Auth::user()->isAdmin())
     <div class="mb-3 row ">
-        @auth
-            @if(auth()->user()->is_admin)
+
                 <div class="col  mb-3 mb-md-0">
                     <a class="col btn btn-primary" href="{{ route('livres.edit',['livre' => $livre->id]) }}">Éditer le Livre</a>
                 </div>
@@ -21,8 +20,6 @@
                         @method('DELETE')
                         <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">Supprimer le Livre</button>
                 </form>
-            @endif
-        @endauth
     </div>
     @endif
     @endauth
