@@ -14,17 +14,17 @@
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" required placeholder="Enter your email">
+                            <input type="email" name="email" id="email" class="form-control" value="" required placeholder="Enter your email">
                         </div>
                         <div class="mb-3">
-                            <label for="amount" class="form-label">Amount</label>
-                            <input type="number" name="amount" id="amount" class="form-control" step="0.01" required placeholder="Enter the amount">
+                            <label for="amount" class="form-label">Montant</label>
+                            <input type="number" name="amount" id="amount" class="form-control" value="{{ $price }}" step="0.01" required placeholder="Enter the amount">
                         </div>
                         <div id="card-element" class="mb-3">
                             <!-- Stripe Elements will be inserted here -->
                         </div>
                         <button class="btn btn-success" type="submit" id="submit-button">
-                            <i class="fa fa-credit-card"></i> Submit Payment
+                            <i class="fa fa-credit-card"></i> Soumettre le paiement
                         </button>
                     </form>
                 </div>

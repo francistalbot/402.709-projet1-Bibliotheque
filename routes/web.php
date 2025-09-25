@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,8 @@ Route::prefix('categories')->middleware(['auth', 'admin'])->group(function () {
 });
 
 Auth::routes();
-Route::get('/payment/stripe/form', [StripePaymentController::class, 'showForm'])->name('stripe.form'); 
+
+Route::get('/payment/stripe/form/{price}', [StripePaymentController::class, 'showForm'])->name('stripe.form'); 
 Route::post('/payment/stripe/pay', [StripePaymentController::class, 'pay'])->name('stripe.pay');
 
 Route::get('/password/reset', function () {
@@ -72,3 +74,19 @@ Route::post('/password/email', function () {
 
 Route::get('/password/change', [HomeController::class, 'showChangePasswordForm'])->middleware('auth')->name('password.change');
 Route::post('/password/change', [HomeController::class, 'changePassword'])->middleware('auth')->name('password.update');
+Route::get('cart',[CartController::class,'cart'])->name('cart');
+Route::get('add-cart/{productId}',[CartController::class,'addCart'])->name('add.cart');
+
+Route::get('add-quantity/{productId}',[CartController::class,'addQuantity'])->name('add.quantity');
+
+Route::get('decrease-quantity/{productId}',[CartController::class,'decreaseQuantity'])->name('decrease.quantity');
+
+Route::get('remove-item/{productId}',[CartController::class,'removeItem'])->name('remove.item');
+
+Route::get('clear',[CartController::class,'clearCart'])->name('clear');
+
+Route::post('/coupon/apply', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+
+Route::post('/stripe/refund/{paymentIntentId}', [StripePaymentController::class, 'refund'])->name('stripe.refund');
+Route::get('/stripe/payments', [StripePaymentController::class, 'paymentHistory'])->middleware(['auth', 'admin'])->name('stripe.payments');
+

@@ -136,7 +136,7 @@
                                 <div>Prix: {{ $livre->prix }} $</div>
                             </div>
                         </div>
-                        <a class="btn btn-outline-primary" href="{{ route('livres.edit',['livre' => $livre->id]) }}">Ajouter au panier</a>
+                        <a class="btn btn-outline-primary" href="{{ route('add.cart',$livre->id) }}">Ajouter au panier</a>
                     
                     </div>
                 </div>
