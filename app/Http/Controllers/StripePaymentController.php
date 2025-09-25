@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Refund;
+use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class StripePaymentController extends Controller
 {
     public function showForm()
     {
+        $user = Auth::user();
         $price = request('price', 0);
-        return view('stripe_payment_form', compact('price'));
+        return view('stripe_payment_form', compact('price', 'user'));
     }
 
     public function pay(Request $request)

@@ -23,6 +23,8 @@
                                         <li><a class="dropdown-item" href="{{ route('authors.index') }}">Gérer les auteurs</a></li>
                                         <li><a class="dropdown-item" href="{{ route('categories.index') }}">Gérer les catégories</a></li>
                                         <li><a class="dropdown-item" href="{{ route('messages.index') }}">Messages</a></li>
+                                        <li><a class="dropdown-item" href="#">Gérer les coupons</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('stripe.payments') }}">Historique des paiement</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -63,6 +65,18 @@
                                     </form>
                                 </div>
                             </li>
+                            @auth
+                            @if(!Auth::user()->isAdmin())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('cart') }}">
+                                    Panier 
+                                    <span class="badge bg-secondary">
+                                        {{ \Cart::getTotalQuantity() }}
+                                    </span>
+                                </a>
+                            </li>
+                            @endif
+                            @endauth
                         @endguest
                     </ul>
                 </div>
