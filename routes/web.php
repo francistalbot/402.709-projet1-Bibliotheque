@@ -67,7 +67,7 @@ Route::get('/password/reset', function () {
 
 Route::post('/password/email', function () {
     $message = "Vous receverez un mail de réinitialisation si votre adresse est enregistrée dans notre système.";
-    return redirect()->route('livres.index')->with('success', $message);
+    return redirect()->route('login')->with('success', $message);
 })->name('password.email');
 
 Route::get('/password/change', [HomeController::class, 'showChangePasswordForm'])->middleware('auth')->name('password.change');
